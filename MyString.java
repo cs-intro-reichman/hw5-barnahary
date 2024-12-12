@@ -7,29 +7,30 @@ public class MyString {
         System.out.println(countChar(hello, 'h'));
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
+        System.out.println();
         System.out.println(spacedString(hello));
         System.out.println("hello, l -> " + MyString.countChar("hello", 'l') + " (expected: 2)");
         System.out.println("hello, h -> " + MyString.countChar("hello", 'h') + " (expected: 1)");
         System.out.println("hello, z -> " + MyString.countChar("hello", 'z') + " (expected: 0)");
         System.out.println("empty string, a -> " + MyString.countChar("", 'a') + " (expected: 0)");
         System.out.println("aaa, a -> " + MyString.countChar("aaa", 'a') + " (expected: 3)");
-
+        System.out.println();
         System.out.println("sap in space -> " + MyString.subsetOf("sap", "space") + " (expected: true)");
         System.out.println("spa in space -> " + MyString.subsetOf("spa", "space") + " (expected: true)");
         System.out.println("pass in space -> " + MyString.subsetOf("pass", "space") + " (expected: false)");
         System.out.println("c in space -> " + MyString.subsetOf("c", "space") + " (expected: true)");
         System.out.println("empty string in anything -> " + MyString.subsetOf("", "anything") + " (expected: true)");
-
+        System.out.println();
         System.out.println("\nTesting spacedString:");
         System.out.println("silent -> \"" + MyString.spacedString("silent") + "\" (expected: s i l e n t)");
         System.out.println("a -> \"" + MyString.spacedString("a") + "\" (expected: a)");
         System.out.println("empty string -> \"" + MyString.spacedString("") + "\" (expected: )");
         System.out.println("hi -> \"" + MyString.spacedString("hi") + "\" (expected: h i)");
-
+        System.out.println();
         System.out.println("length 5 -> " + MyString.randomStringOfLetters(5));
         System.out.println("length 10 -> " + MyString.randomStringOfLetters(10));
         System.out.println("length 0 -> \"" + MyString.randomStringOfLetters(0) + "\"");
-
+        System.out.println();
         System.out.println("committee - meet -> " + MyString.remove("committee", "meet") + " (expected: comit)");
         System.out.println("abc - abc -> " + MyString.remove("abc", "abc") + " (expected: )");
         System.out.println("abc - b -> " + MyString.remove("abc", "b") + " (expected: ac)");
@@ -51,7 +52,6 @@ public class MyString {
             if (str.charAt(i) == ch) { 
                 count++;
             }
-            System.out.println(count);
         }
         return count;
     }
@@ -107,7 +107,10 @@ public class MyString {
     public static String spacedString(String str) {
         String result = "";
         for (int i = 0; i < str.length(); i++) { 
-            result += " " + str.charAt(i);
+            result += str.charAt(i);
+            if (i < str.length() - 1) { 
+                result += " ";
+            }
         }
         return result;
     }
