@@ -62,36 +62,58 @@ public class Scrabble {
 	public static int wordScore(String word) {
 		int score = 0;
 	
-		// Convert word to lowercase
+		// Ensure word is lowercase to match SCRABBLE_LETTER_VALUES
 		word = word.toLowerCase();
 	
-		// Calculate letter scores
-		for (int i = 0; i < word.length(); i++) {
+		// Sum up letter values
+		for (int i = 0; i < word.length(); i++) { 
 			char c = word.charAt(i);
+			// Validate character is a valid letter
 			if (c >= 'a' && c <= 'z') {
 				score += SCRABBLE_LETTER_VALUES[c - 'a'];
 			}
 		}
 	
 		// Bonus for full hand size
-		if (word.length() == HAND_SIZE) {
+		if (word.length() == HAND_SIZE) { 
+			score *= HAND_SIZE;
 			score += 50;
 		}
 	
 		// Bonus for containing "runi"
-		if (word.contains("runi")) {
+		if (containsRuni(word)) { 
+			score *= word.length();
 			score += 1000;
 		}
 	
 		return score;
 	}
+	
+	// Helper function to check for "runi" in non-continuous sequence
+	private static boolean containsRuni(String word) {
+		String sequence = "runi";
+		int index = 0;
+		for (char c : word.toCharArray()) {
+			if (index < sequence.length() && c == sequence.charAt(index)) {
+				index++;
+			}
+		}
+		return index == sequence.length();
+	}
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
 	// into it, at random indexes, the letters 'a' and 'e'
 	// (these two vowels make it easier for the user to construct words)
 	public static String createHand() {
+		// Generate random string of length HAND_SIZE - 2
 		String hand = MyString.randomStringOfLetters(HAND_SIZE - 2);
+	
+		// Insert 'a' at a random position
 		hand = MyString.insertRandomly('a', hand);
+	
+		// Insert 'e' at a random position
 		hand = MyString.insertRandomly('e', hand);
+	
+		// Return the final hand
 		return hand;
 	}
 	
@@ -113,7 +135,7 @@ public class Scrabble {
 			// end-of-line characters.
 			String input = in.readString();
 			
-			if (input.equals('.')) { 
+			if (input.equals(".")) { 
 				break;
 			}
 			if (!isWordInDictionary(input)) { 
@@ -166,10 +188,10 @@ public class Scrabble {
 	public static void main(String[] args) {
 		//// Uncomment the test you want to run
 		////testBuildingTheDictionary();  
-		testScrabbleScore();    
+		////testScrabbleScore();    
 		////testCreateHands();  
-		////testPlayHands();
-		////playGame();
+		testPlayHands();
+		playGame();
 	}
 
 	public static void testBuildingTheDictionary() {
